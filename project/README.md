@@ -209,6 +209,41 @@ VITE_API_URL=http://localhost:4000/api
 
 ## 🚀 Despliegue en Producción
 
+### Opción 1: Render (Recomendado)
+
+1. **Crear cuenta en Render** (https://render.com)
+
+2. **Configurar base de datos PostgreSQL**
+   - Crear un servicio PostgreSQL en Render
+   - Anotar las credenciales de conexión
+
+3. **Desplegar servicios**
+   - Conectar tu repositorio Git a Render
+   - Crear dos servicios web:
+     - **Backend**: Usar Dockerfile en `/backend`
+     - **Frontend**: Usar Dockerfile en `/frontend`
+
+4. **Configurar variables de entorno**
+   - Para el backend:
+     ```
+     NODE_ENV=production
+     DB_HOST=<tu-postgres-host>
+     DB_PORT=5432
+     DB_NAME=<tu-db-name>
+     DB_USER=<tu-db-user>
+     DB_PASSWORD=<tu-db-password>
+     JWT_SECRET=<tu-jwt-secret>
+     ```
+   - Para el frontend:
+     ```
+     VITE_API_URL=https://<tu-backend-url>.onrender.com/api
+     ```
+
+5. **Actualizar URLs**
+   - Una vez desplegado el backend, actualizar `VITE_API_URL` en el frontend
+
+### Opción 2: Docker Compose
+
 El sistema está listo para producción con:
 
 - Contenedores Docker optimizados

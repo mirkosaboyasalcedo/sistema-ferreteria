@@ -14,6 +14,6 @@ COPY . .
 # Compilar TypeScript
 RUN npm run build
 
-EXPOSE 4000
+EXPOSE $PORT
 
 CMD ["npm", "start"]

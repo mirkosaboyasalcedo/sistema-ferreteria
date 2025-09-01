@@ -1,0 +1,44 @@
+services:
+  - type: web
+    name: ferreteria-backend
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: "4000"
+      - key: NODE_ENV
+        value: "production"
+      - key: DB_HOST
+        fromDatabase:
+          name: ferreteria-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: ferreteria-db
+          property: port
+      - key: DB_NAME
+        value: ferreteria_db
+      - key: DB_USER
+        fromDatabase:
+          name: ferreteria-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: ferreteria-db
+          property: password
+      - key: JWT_SECRET
+        value: ferreteria_jwt_secret_key_2024
+
+  - type: web
+    name: ferreteria-frontend
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run preview
+    envVars:
+      - key: PORT
+        value: "3000"
+      - key: VITE_API_URL
+        value: "https://ferreteria-backend.onrender.com/api"

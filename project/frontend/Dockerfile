@@ -17,6 +17,6 @@ RUN npm run build
 # Servir la aplicación con un servidor estático
 RUN npm install -g serve
 
-EXPOSE 3000
+EXPOSE $PORT
 
-CMD ["serve", "-s", "dist", "-l", "3000"]
+CMD ["serve", "-s", "dist", "-l", "$PORT"]
